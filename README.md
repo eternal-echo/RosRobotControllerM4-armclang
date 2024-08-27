@@ -5,6 +5,10 @@
 ## 使用
 打开`RosRobotControllerM4\MDK-ARM\RosRobotControllerM4.uvprojx`路径下的工程文件，编译并下载到STM32F407ZGT6开发板上。
 
+## 硬件外设
+- 串口：huart3，用于与ROS通信。注意，波特率为`1000000`。
+- 日志串口：huart1，用于输出日志。波特率为`115200`。
+
 ## 工程结构
 - System：
     - app.c：最上层的应用代码，这里包含了差速小车的电机控制逻辑，后续需要修改
@@ -15,7 +19,7 @@
         - 依赖的硬件接口：`send_packet`，该系统的硬件实现为向`packet_tx_queueHandle`队列发送数据，然后创建的任务`packet_tx_task_entry`会持续读取该队列的数据，统一发送到串口。
             - Tips：采用消息队列是为了避免系统的多个任务同时直接访问串口传输数据，导致乱码甚至hardfault。
         - 对外提供的接口：
-            - `packet_transmit`：发送数据到串口，其他任务（如传感器任务）可以调用该接口发送数据到ROS对应的串口。
+            - `packet_transmit`：发送数据到串口，其他任务（如传感器任务）可以调用该接口发送数据到ROS对应的串口。想要知道发送了哪些数据，搜索这个函数即可。
             - `packet_recv`：接收数据，packet_rx_task_entry任务里持续调用该接口解析数据。在调用之前，已经通过串口DMA中断回调packet_dma_receive_event_callback读取了数据到缓冲区。
 ## 任务总览
 ### ROS串口通信任务

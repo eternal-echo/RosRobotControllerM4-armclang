@@ -43,15 +43,15 @@ int stdin_getchar (void)
 
 int stderr_putchar (int ch)
 {
-  //  HAL_UART_Transmit(&huart1, (uint8_t*)&ch, 1, 0xFFFF);
-    SEGGER_RTT_Write(0, &ch, 1);
+   HAL_UART_Transmit(&huart1, (uint8_t*)&ch, 1, 0xFFFF);
+    // SEGGER_RTT_Write(0, &ch, 1);
     return ch;
 }
 
 int stdout_putchar (int ch)
 {
-  //  HAL_UART_Transmit(&huart1, (uint8_t*)&ch, 1, 0xFFFF);
-    SEGGER_RTT_Write(0, &ch, 1);
+   HAL_UART_Transmit(&huart1, (uint8_t*)&ch, 1, 0xFFFF);
+    // SEGGER_RTT_Write(0, &ch, 1);
     return (ch);
 }
 
