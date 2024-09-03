@@ -19,9 +19,9 @@ void pwm_servo_duty_compare(PWMServoObjectTypeDef *self)   //脉宽变化比较�
         self->duty_changed = false;
         self->inc_times = self->duration / 20; // 计算需要递增的次数
         if(self->target_duty > self->current_duty) { /* 计算总的位置变换量 */
-            self->duty_inc = (float)(-(self->target_duty - self->current_duty));
+            self->duty_inc = (float)((self->target_duty - self->current_duty));
         } else {
-            self->duty_inc = (float)(self->current_duty - self->target_duty);
+            self->duty_inc = (float)(-(self->current_duty - self->target_duty));
         }
         self->duty_inc /= (float)self->inc_times; /* 计算每控制周期位置增量 */
         self->is_running = true;  // 舵机开始动作
