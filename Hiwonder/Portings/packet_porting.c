@@ -18,6 +18,8 @@
 #include "lwmem_porting.h"
 #include "packet_handle.h"
 
+#define ROS_UART_HANDLE huart2
+
 #define PACKET_RX_FIFO_BUFFER_SIZE 2048 /* FIFO缓存长度 */
 #define PACKET_RX_DMA_BUFFER_SIZE 256 /* 单个DMA缓存长度 */
 
@@ -87,8 +89,8 @@ static void packet_dma_receive_event_callback(UART_HandleTypeDef *huart, uint16_
 {
     int cur_index = packet_controller.rx_dma_buffer_index; /* 取得当前DMA缓存的索引号 */
     packet_controller.rx_dma_buffer_index ^= 1;
-    HAL_UART_AbortReceive(&huart3);
-    HAL_UARTEx_ReceiveToIdle_DMA(&huart3, packet_controller.rx_dma_buffers[packet_controller.rx_dma_buffer_index], PACKET_RX_DMA_BUFFER_SIZE);
+    HAL_UART_AbortReceive(&ROS_UART_HANDLE);
+    HAL_UARTEx_ReceiveToIdle_DMA(&ROS_UART_HANDLE, packet_controller.rx_dma_buffers[packet_controller.rx_dma_buffer_index], PACKET_RX_DMA_BUFFER_SIZE);
     lwrb_write(packet_controller.rx_fifo, packet_controller.rx_dma_buffers[cur_index], length); /* 将接收到的数据写入fifo ring */
     osSemaphoreRelease(packet_rx_not_emptyHandle); /* 置位接收缓存非空信号 */
 }
@@ -100,11 +102,11 @@ static void packet_dma_receive_event_callback(UART_HandleTypeDef *huart, uint16_
  */
 void packet_start_recv(void)
 {
-    HAL_UART_AbortReceive(&huart3);
-    HAL_UART_RegisterCallback(&huart3, HAL_UART_ERROR_CB_ID, packet_uart_error_callblack);
-    HAL_UART_RegisterRxEventCallback(&huart3, packet_dma_receive_event_callback); /* 注册接收事件回调 */
+    HAL_UART_AbortReceive(&ROS_UART_HANDLE);
+    HAL_UART_RegisterCallback(&ROS_UART_HANDLE, HAL_UART_ERROR_CB_ID, packet_uart_error_callblack);
+    HAL_UART_RegisterRxEventCallback(&ROS_UART_HANDLE, packet_dma_receive_event_callback); /* 注册接收事件回调 */
     /* 使用 ReceiveToIdle_DMA 进行接收， 该函数会在DMA缓存满时中断或在接收空闲时中断并触发接收事件回调 */
-    HAL_UARTEx_ReceiveToIdle_DMA(&huart3, packet_controller.rx_dma_buffers[packet_controller.rx_dma_buffer_index], PACKET_RX_DMA_BUFFER_SIZE);
+    HAL_UARTEx_ReceiveToIdle_DMA(&ROS_UART_HANDLE, packet_controller.rx_dma_buffers[packet_controller.rx_dma_buffer_index], PACKET_RX_DMA_BUFFER_SIZE);
     /* 开始接收 */
 }
 
@@ -130,7 +132,7 @@ static void packet_uart_error_callblack(UART_HandleTypeDef *huart)
 void packet_rx_task_entry(void *argument)
 {
     osSemaphoreAcquire(packet_rx_not_emptyHandle, 0); /* 默认信号不为零，先清除掉 */
-    __HAL_UNLOCK(&huart3);
+    __HAL_UNLOCK(&ROS_UART_HANDLE);
     packet_start_recv();
     for(;;) {
         osSemaphoreAcquire(packet_rx_not_emptyHandle, osWaitForever); /* 等待接收缓存非空 */
@@ -153,8 +155,8 @@ void packet_tx_task_entry(void *argument)
         osSemaphoreAcquire(packet_tx_idleHandle, osWaitForever); /* 等待发送空闲信号 */
         osStatus_t status = osMessageQueueGet(packet_tx_queueHandle, &packet_controller.tx_dma_buffer, NULL, osWaitForever); /* 从发送队列中取出数据 */
         if(osOK == status) {
-            HAL_UART_RegisterCallback(&huart3, HAL_UART_TX_COMPLETE_CB_ID, packet_dma_transmit_finished); /* 注册 DMA 接收完成回调 */
-            HAL_UART_Transmit_DMA(&huart3, (uint8_t*)packet_controller.tx_dma_buffer, packet_controller.tx_dma_buffer->data_length + 5);  /* 触发 DMA 发送*/
+            HAL_UART_RegisterCallback(&ROS_UART_HANDLE, HAL_UART_TX_COMPLETE_CB_ID, packet_dma_transmit_finished); /* 注册 DMA 接收完成回调 */
+            HAL_UART_Transmit_DMA(&ROS_UART_HANDLE, (uint8_t*)packet_controller.tx_dma_buffer, packet_controller.tx_dma_buffer->data_length + 5);  /* 触发 DMA 发送*/
         }
     }
 }
@@ -170,8 +172,8 @@ static void packet_dma_transmit_finished(UART_HandleTypeDef * huart)
     lwmem_free(packet_controller.tx_dma_buffer);
     osStatus_t status = osMessageQueueGet(packet_tx_queueHandle, &packet_controller.tx_dma_buffer, NULL, 0); /* 从发送队列中取出数据 */
     if(osOK == status) {
-        HAL_UART_RegisterCallback(&huart3, HAL_UART_TX_COMPLETE_CB_ID, packet_dma_transmit_finished); /* 注册 DMA 接收完成回调 */
-        HAL_UART_Transmit_DMA(&huart3, (uint8_t*)packet_controller.tx_dma_buffer, packet_controller.tx_dma_buffer->data_length + 5); /* 触发 DMA 发送*/
+        HAL_UART_RegisterCallback(&ROS_UART_HANDLE, HAL_UART_TX_COMPLETE_CB_ID, packet_dma_transmit_finished); /* 注册 DMA 接收完成回调 */
+        HAL_UART_Transmit_DMA(&ROS_UART_HANDLE, (uint8_t*)packet_controller.tx_dma_buffer, packet_controller.tx_dma_buffer->data_length + 5); /* 触发 DMA 发送*/
     } else {
         osSemaphoreRelease(packet_tx_idleHandle); /* 置位发送空闲信号 */
     }
