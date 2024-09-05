@@ -18,7 +18,7 @@
 #include "lwmem_porting.h"
 #include "packet_handle.h"
 
-#define ROS_UART_HANDLE huart2
+#define ROS_UART_HANDLE huart3
 
 #define PACKET_RX_FIFO_BUFFER_SIZE 2048 /* FIFO缓存长度 */
 #define PACKET_RX_DMA_BUFFER_SIZE 256 /* 单个DMA缓存长度 */
