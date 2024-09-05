@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx,LV_CONF_INCLUDE_SIMPLE,LV_LVGL_H_INCLUDE_SIMPLE</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Middlewares/ST/STM32_USB_Host_Library/Class/HID/Inc;../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../USB_HOST/Target;../USB_HOST/App;../Third_Party/Fusion/Fusion;../Third_Party/LVGL/porting;../Third_Party/LVGL/src;../Third_Party/LVGL;../Third_Party/U8g2;../Third_Party/RTT;../Third_Party/Lw;../Third_Party;../Hiwonder/LVGL_UI/guider_customer_fonts;../Hiwonder/LVGL_UI/guider_fonts;../Hiwonder/LVGL_UI/images;../Hiwonder/LVGL_UI;../Hiwonder/USB_HOST;../Hiwonder/Peripherals;../Hiwonder/Portings;../Hiwonder/Chassis;../Hiwonder/System;../Hiwonder/Misc</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Middlewares/ST/STM32_USB_Host_Library/Class/HID/Inc;../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../USB_HOST/Target;../USB_HOST/App;../Third_Party/Fusion/Fusion;../Third_Party/LVGL/porting;../Third_Party/LVGL/src;../Third_Party/LVGL;../Third_Party/U8g2;../Third_Party/RTT;../Third_Party/Lw;../Third_Party;../Hiwonder/LVGL_UI/guider_customer_fonts;../Hiwonder/LVGL_UI/guider_fonts;../Hiwonder/LVGL_UI/images;../Hiwonder/LVGL_UI;../Hiwonder/USB_HOST;../Hiwonder/Peripherals;../Hiwonder/Portings;../Hiwonder/Chassis;../Hiwonder/System;../Hiwonder/Misc;..\Hiwonder\Peripherals\mpu6050\interface;..\Hiwonder\Peripherals\mpu6050\src;..\Hiwonder\Peripherals\mpu6050\example</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -2468,11 +2468,6 @@
               <FilePath>..\Hiwonder\Peripherals\display_st7735.c</FilePath>
             </File>
             <File>
-              <FileName>imu_mpu6050.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Hiwonder\Peripherals\imu_mpu6050.c</FilePath>
-            </File>
-            <File>
               <FileName>pwm_servo.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Hiwonder\Peripherals\pwm_servo.c</FilePath>
@@ -2486,6 +2481,26 @@
               <FileName>encoder_motor.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Hiwonder\Peripherals\encoder_motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>driver_mpu6050.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hiwonder\Peripherals\mpu6050\src\driver_mpu6050.c</FilePath>
+            </File>
+            <File>
+              <FileName>driver_mpu6050_interface.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hiwonder\Peripherals\mpu6050\interface\driver_mpu6050_interface.c</FilePath>
+            </File>
+            <File>
+              <FileName>iic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hiwonder\Peripherals\mpu6050\interface\iic.c</FilePath>
+            </File>
+            <File>
+              <FileName>driver_mpu6050_basic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hiwonder\Peripherals\mpu6050\example\driver_mpu6050_basic.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2531,6 +2546,11 @@
               <FileName>object.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Hiwonder\Misc\object.h</FilePath>
+            </File>
+            <File>
+              <FileName>delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hiwonder\Misc\delay.c</FilePath>
             </File>
           </Files>
         </Group>
