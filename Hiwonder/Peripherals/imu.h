@@ -89,6 +89,8 @@ struct IMU_Object {
     */
     int (*get_gyro)(IMU_ObjectTypeDef *self, float *xyz);
 
+    int (*get_accel_gyro)(IMU_ObjectTypeDef *self, float *accel, float *gyro);
+
 
     /**
       * @brief 获取当前某个轴的加速度G值,
