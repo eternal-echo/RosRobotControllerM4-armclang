@@ -280,7 +280,7 @@ static void packet_pwm_servo_handle(struct PacketRawFrame *frame)
             PWMServoSetMultiPositionCommandTypeDef *cmd = (PWMServoSetMultiPositionCommandTypeDef *)frame->data_and_checksum;
             for(int i = 0; i < cmd->servo_num; ++i) {
                 if(cmd->elements[i].servo_id <= 4) {
-                    pwm_servo_set_position( pwm_servos[cmd->elements[i].servo_id - 1], cmd->elements[i].pulse, cmd->elements[i].pulse );
+                    pwm_servo_set_position( pwm_servos[cmd->elements[i].servo_id - 1], cmd->elements[i].pulse, cmd->duration );
                 }
             }
             break;
