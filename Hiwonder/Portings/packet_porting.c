@@ -87,6 +87,7 @@ static int send_packet(struct PacketController *self, struct PacketRawFrame *fra
  */
 static void packet_dma_receive_event_callback(UART_HandleTypeDef *huart, uint16_t length)
 {
+    printf("[packet][rx][callback] %d\n", length);
     int cur_index = packet_controller.rx_dma_buffer_index; /* 取得当前DMA缓存的索引号 */
     packet_controller.rx_dma_buffer_index ^= 1;
     HAL_UART_AbortReceive(&ROS_UART_HANDLE);
@@ -108,6 +109,7 @@ void packet_start_recv(void)
     /* 使用 ReceiveToIdle_DMA 进行接收， 该函数会在DMA缓存满时中断或在接收空闲时中断并触发接收事件回调 */
     HAL_UARTEx_ReceiveToIdle_DMA(&ROS_UART_HANDLE, packet_controller.rx_dma_buffers[packet_controller.rx_dma_buffer_index], PACKET_RX_DMA_BUFFER_SIZE);
     /* 开始接收 */
+    printf("[packet][rx][start]\n");
 }
 
 /**
@@ -121,6 +123,7 @@ void packet_start_recv(void)
 static void packet_uart_error_callblack(UART_HandleTypeDef *huart)
 {
     packet_start_recv();
+    printf("[packet][rx][error]\n");
 }
 /**
  * @brief  串口协议包的接收任务入口
@@ -137,6 +140,7 @@ void packet_rx_task_entry(void *argument)
     for(;;) {
         osSemaphoreAcquire(packet_rx_not_emptyHandle, osWaitForever); /* 等待接收缓存非空 */
         packet_recv(&packet_controller);
+        printf("[packet][rx][task] %d\n", packet_controller.frame.function);
     }
 }
 

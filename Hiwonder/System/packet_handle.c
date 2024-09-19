@@ -281,6 +281,7 @@ static void packet_pwm_servo_handle(struct PacketRawFrame *frame)
             for(int i = 0; i < cmd->servo_num; ++i) {
                 if(cmd->elements[i].servo_id <= 4) {
                     pwm_servo_set_position( pwm_servos[cmd->elements[i].servo_id - 1], cmd->elements[i].pulse, cmd->duration );
+                    printf("[multi][set] servo_id:%d, pulse:%d, duration:%d\n", cmd->elements[i].servo_id, cmd->elements[i].pulse, cmd->duration);
                 }
             }
             break;
@@ -290,6 +291,7 @@ static void packet_pwm_servo_handle(struct PacketRawFrame *frame)
             //上位机从1号舵机开始
             if(cmd->servo_id <= 4) {
                 pwm_servo_set_position( pwm_servos[cmd->servo_id - 1], cmd->pulse, cmd->duration );
+                printf("[single][set] servo_id:%d, pulse:%d, duration:%d\n", cmd->servo_id, cmd->pulse, cmd->duration);
             }
             break;
         }
@@ -302,6 +304,7 @@ static void packet_pwm_servo_handle(struct PacketRawFrame *frame)
                 report.sub_command = cmd->cmd;
                 memcpy(report.args, &pulse, 2);
                 packet_transmit(&packet_controller, PACKET_FUNC_PWM_SERVO, &report, 4);
+                printf("[read] servo_id:%d, pulse:%d\n", cmd->servo_id, pulse);
             }
             break;
         }
@@ -376,8 +379,8 @@ void packet_handle_init(void)
 {
     packet_register_callback(&packet_controller, PACKET_FUNC_LED, packet_led_handle);
     packet_register_callback(&packet_controller, PACKET_FUNC_BUZZER, packet_buzzer_handle);
-    packet_register_callback(&packet_controller, PACKET_FUNC_MOTOR, packet_motor_handle);
-    packet_register_callback(&packet_controller, PACKET_FUNC_BUS_SERVO, packet_serial_servo_handle);
+    // packet_register_callback(&packet_controller, PACKET_FUNC_MOTOR, packet_motor_handle);
+    // packet_register_callback(&packet_controller, PACKET_FUNC_BUS_SERVO, packet_serial_servo_handle);
     packet_register_callback(&packet_controller, PACKET_FUNC_PWM_SERVO, packet_pwm_servo_handle);
 }
 

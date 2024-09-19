@@ -8,7 +8,7 @@
 #include "driver_mpu6050_basic.h"
 
 IMU_ObjectTypeDef imu;
-int imu_report_interval = 100;
+int imu_report_interval = 50;
 
 static void imu_reset(IMU_ObjectTypeDef *self);
 static int imu_get_accel_gyro(IMU_ObjectTypeDef *self, float *xyz, float *gyro);
@@ -28,7 +28,7 @@ void imu_init(void)
 void imu_task_entry(void *argument)
 {
     // extern osSemaphoreId_t mpu6050_data_readyHandle;
-
+    int res;
     imu_init();
     imu.reset(&imu);
 
@@ -38,7 +38,12 @@ void imu_task_entry(void *argument)
         // imus[0]->update(imus[0]);
 		// imus[0]->get_accel(imus[0], report.array.accel_array);
 		// imus[0]->get_gyro(imus[0], report.array.gyro_array);
-        imu.get_accel_gyro(&imu, report.array.accel_array, report.array.gyro_array);
+        res = imu.get_accel_gyro(&imu, report.array.accel_array, report.array.gyro_array);
+        if (res != 0)
+        {
+            printf("get accel gyro failed.\n");
+            continue;
+        }
         packet_transmit(&packet_controller, PACKET_FUNC_IMU, &report, sizeof(PacketReportIMU_Raw_TypeDef));
         // LOG_DEBUG("IMU: %f %f %f %f %f %f\n", report.array.accel_array[0], report.array.accel_array[1], report.array.accel_array[2], report.array.gyro_array[0], report.array.gyro_array[1], report.array.gyro_array[2]);
         osDelay(imu_report_interval);
@@ -56,8 +61,10 @@ static void imu_reset(IMU_ObjectTypeDef *self)
     if (res != 0)
     {
         /* handle error */
-        LOG_ERROR("init failed.\n");
+        printf("init failed.\n");
     }
+
+    // return;
 }
 
 static int imu_get_accel_gyro(IMU_ObjectTypeDef *self, float *xyz, float *gyro)
@@ -67,8 +74,18 @@ static int imu_get_accel_gyro(IMU_ObjectTypeDef *self, float *xyz, float *gyro)
     res = mpu6050_basic_read(xyz, gyro);
     if (res != 0)
     {
-        LOG_ERROR("read failed.\n");
+        printf("read failed.\n");
         return -1;
     }
     return 0;
+
+    // // 填充测试数据
+    // xyz[0] = 1.0;
+    // xyz[1] = 2.0;
+    // xyz[2] = 3.0;
+
+    // gyro[0] = 4.0;
+    // gyro[1] = 5.0;
+    // gyro[2] = 6.0;
+    // return 0;
 }
