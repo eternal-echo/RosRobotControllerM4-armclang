@@ -64,7 +64,7 @@ osThreadId_t imu_taskHandle;
 const osThreadAttr_t imu_task_attributes = {
   .name = "imu_task",
   .stack_size = 256 * 4,
-  .priority = (osPriority_t) osPriorityAboveNormal,
+  .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for packet_tx_task */
 osThreadId_t packet_tx_taskHandle;
@@ -78,7 +78,7 @@ osThreadId_t packet_rx_taskHandle;
 const osThreadAttr_t packet_rx_task_attributes = {
   .name = "packet_rx_task",
   .stack_size = 256 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+  .priority = (osPriority_t) osPriorityAboveNormal,
 };
 /* Definitions for sbus_rx_task */
 osThreadId_t sbus_rx_taskHandle;

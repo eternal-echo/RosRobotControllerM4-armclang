@@ -159,7 +159,7 @@
           <Type>0</Type>
           <LineNumber>33</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134295920</Address>
+          <Address>134308760</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -175,7 +175,7 @@
           <Type>0</Type>
           <LineNumber>19</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134295784</Address>
+          <Address>134308624</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -191,7 +191,7 @@
           <Type>0</Type>
           <LineNumber>45</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134296088</Address>
+          <Address>134308928</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -207,7 +207,7 @@
           <Type>0</Type>
           <LineNumber>91</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134287990</Address>
+          <Address>134300818</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -223,7 +223,7 @@
           <Type>0</Type>
           <LineNumber>431</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134257992</Address>
+          <Address>134258664</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -239,7 +239,7 @@
           <Type>0</Type>
           <LineNumber>139</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134289458</Address>
+          <Address>134302236</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -253,25 +253,9 @@
         <Bp>
           <Number>6</Number>
           <Type>0</Type>
-          <LineNumber>123</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>134289800</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Hiwonder\Portings\packet_porting.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\RosRobotControllerM4\../Hiwonder/Portings/packet_porting.c\123</Expression>
-        </Bp>
-        <Bp>
-          <Number>7</Number>
-          <Type>0</Type>
           <LineNumber>3641</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134261134</Address>
+          <Address>134261806</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -283,20 +267,84 @@
           <Expression>\\RosRobotControllerM4\../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c\3641</Expression>
         </Bp>
         <Bp>
-          <Number>8</Number>
+          <Number>7</Number>
           <Type>0</Type>
-          <LineNumber>41</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134281352</Address>
+          <LineNumber>2489</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>134246492</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Hiwonder\Portings\imu_porting.c</Filename>
+          <Filename>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\RosRobotControllerM4\../Hiwonder/Portings/imu_porting.c\41</Expression>
+          <Expression>\\RosRobotControllerM4\../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c\2489</Expression>
+        </Bp>
+        <Bp>
+          <Number>8</Number>
+          <Type>0</Type>
+          <LineNumber>2489</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>134246518</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\RosRobotControllerM4\../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c\2489</Expression>
+        </Bp>
+        <Bp>
+          <Number>9</Number>
+          <Type>0</Type>
+          <LineNumber>2531</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134246806</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\RosRobotControllerM4\../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c\2531</Expression>
+        </Bp>
+        <Bp>
+          <Number>10</Number>
+          <Type>0</Type>
+          <LineNumber>108</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134302424</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\Hiwonder\Portings\packet_porting.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\RosRobotControllerM4\../Hiwonder/Portings/packet_porting.c\108</Expression>
+        </Bp>
+        <Bp>
+          <Number>11</Number>
+          <Type>0</Type>
+          <LineNumber>123</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\Hiwonder\Portings\packet_porting.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -304,6 +352,11 @@
           <count>0</count>
           <WinNumber>1</WinNumber>
           <ItemText>packet_controller</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>huart</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>
